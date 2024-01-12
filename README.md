@@ -7,26 +7,38 @@ Embloy's Node SDK for interacting with your Embloy integration.
 Install Embloy-Node SDK:
 
 ```Bash
-pip install embloy-sdk
+# Install through pip
+pip3 install --upgrade embloy_sdk
+```
+
+or in your requirements.txt
+```python
+# Find the version you want to pin:
+# https://pypi.org/project/embloy-sdk/#history
+# Specify that version in your requirements.txt file
+embloy>=0.2.0
 ```
 
 Integrate it in your service:
 
 ```Python
 // In your application or script
+from embloy_sdk import EmbloyClient
+
+# Replace with your actual values
 client_token = 'your_client_token'
-session_data = {
-    'success_url': 'https://example.com/success',
-    'cancel_url': 'https://example.com/cancel',
-    'job_slug': 'example_job'
+session = {
+    'mode': 'job',
+    'success_url': 'your_success_url',
+    'cancel_url': 'your_cancel_url',
+    'job_slug': 'your_job_slug'
 }
 
-embloy_client = EmbloyClient(client_token, session_data)
-try:
-    result = embloy_client.make_request()
-    print(result)
-except Exception as e:
-    print(f"An error occurred: {str(e)}")
+# Create an instance of the EmbloyClient
+embloy_client = EmbloyClient(client_token, session)
+
+# Make a request to the Embloy API
+redirect_url = embloy_client.make_request()
 ```
 
 ## Publish Package
