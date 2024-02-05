@@ -1,6 +1,6 @@
-# Embloy Node
+# Embloy Python
 
-Embloy's Node SDK for interacting with your Embloy integration.
+Embloy's Python SDK for interacting with your Embloy integration.
 
 ## Usage
 
@@ -16,29 +16,21 @@ or in your requirements.txt
 # Find the version you want to pin:
 # https://pypi.org/project/embloy-sdk/#history
 # Specify that version in your requirements.txt file
-embloy>=0.2.0
+embloy_sdk>=0.3.1b
 ```
 
 Integrate it in your service:
 
 ```Python
-// In your application or script
-from embloy_sdk import EmbloyClient
+# In your application or script
+from embloy_sdk import EmbloyClient, EmbloySession
 
 # Replace with your actual values
 client_token = 'your_client_token'
-session = {
-    'mode': 'job',
-    'success_url': 'your_success_url',
-    'cancel_url': 'your_cancel_url',
-    'job_slug': 'your_job_slug'
-}
-
-# Create an instance of the EmbloyClient
-embloy_client = EmbloyClient(client_token, session)
+session = EmbloySession("job", "your_job_slug", "your_success_url", "your_cancel_url")
 
 # Make a request to the Embloy API
-redirect_url = embloy_client.make_request()
+redirect_url = EmbloyClient(client_token, session).make_request()
 ```
 
 ## Publish Package
