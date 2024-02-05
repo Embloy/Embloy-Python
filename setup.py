@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='embloy_sdk',
-    version='0.3.1b',
+    version='0.3.23b',
     packages=find_packages(),
     install_requires=[
         'requests',

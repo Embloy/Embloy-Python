@@ -16,7 +16,7 @@ or in your requirements.txt
 # Find the version you want to pin:
 # https://pypi.org/project/embloy-sdk/#history
 # Specify that version in your requirements.txt file
-embloy_sdk>=0.3.1b
+embloy_sdk>=0.3.23b
 ```
 
 Integrate it in your service:
@@ -33,8 +33,14 @@ session = EmbloySession("job", "your_job_slug", "your_success_url", "your_cancel
 redirect_url = EmbloyClient(client_token, session).make_request()
 ```
 
+## Run the tests
+```Bash
+python -m unittest tests/test_embloy_client.py
+```
+
 ## Publish Package
 ```Bash
+
 python setup.py sdist bdist_wheel
 
 twine upload dist/*
