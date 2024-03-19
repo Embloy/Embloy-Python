@@ -16,7 +16,7 @@ or in your requirements.txt
 # Find the version you want to pin:
 # https://pypi.org/project/embloy-sdk/#history
 # Specify that version in your requirements.txt file
-embloy_sdk>=0.3.23b
+embloy_sdk>=0.3.24
 ```
 
 Integrate it in your service:
