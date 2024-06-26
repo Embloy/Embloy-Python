@@ -23,11 +23,12 @@ Integrate it in your service:
 
 ```Python
 # In your application or script
-from embloy_sdk import EmbloyClient, EmbloySession
+from embloy_sdk import EmbloyClient, EmbloySession, SessionOptions
 
 # Replace with your actual values
 client_token = 'your_client_token'
-session = EmbloySession("job", "your_job_slug", "your_success_url", "your_cancel_url")
+options = SessionOptions('your_success_url', 'your_cancel_url')
+session = EmbloySession("job", "your_job_slug", options)
 
 # Make a request to the Embloy API
 redirect_url = EmbloyClient(client_token, session).make_request()
