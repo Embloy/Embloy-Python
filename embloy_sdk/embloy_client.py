@@ -1,6 +1,6 @@
-import requests
+import httpx
+from urllib.parse import urlencode
 from .embloy_session import EmbloySession
-import json
 
 class EmbloyClient:
     """
@@ -36,6 +36,7 @@ class EmbloyClient:
         self.api_url = api_url
         self.base_url = base_url
         self.api_version = api_version
+        self.http_client = httpx.Client()
 
     def form_request(self):
         data = {
@@ -49,13 +50,7 @@ class EmbloyClient:
         if self.session.cancel_url is not None:
             data['cancel_url'] = self.session.cancel_url
 
-        headers = {
-            'client_token': self.client_token,
-            'Content-Type': 'application/json',
-            'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0',
-        }
-
-        return data, headers
+        return data
 
     """
     Makes a request to the API and returns a URL with the request token.
@@ -71,17 +66,23 @@ class EmbloyClient:
         If the request fails for any reason.
     """
     def make_request(self):
-        data, headers = self.form_request()
+        data = self.form_request()
 
-        url = f"{self.api_url}/{self.api_version}/sdk/request/auth/token"
+        request_url = f"{self.api_url}/{self.api_version}/sdk/request/auth/token"
+        headers = {
+            'client_token': self.client_token,
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:122.0) Gecko/20100101 Firefox/122.0'
+        }
 
         try:
-            response = requests.request("POST", url, headers=headers, data=json.dumps(data))
+            data = {k: v for k, v in data.items() if v is not None}
+            response = self.http_client.post(request_url, headers=headers, data=urlencode(data))
 
             response.raise_for_status()
             request_token = response.json()['request_token']
             return f"{self.base_url}/sdk/apply?request_token={request_token}"
-        except requests.exceptions.RequestException as e:
+        except httpx.RequestError as e:
             debug_info = {
                 'client_token': self.client_token,
                 'error': str(e),
