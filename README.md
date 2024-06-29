@@ -1,4 +1,4 @@
-# Embloy Python
+# [Embloy-Python](https://pypi.org/project/embloy-sdk) &middot; [![GitHub license](https://img.shields.io/badge/license-AGPL3.0-blue.svg)](https://github.com/Embloy/Embloy-Python/blob/main/LICENSE) [![PyPI version](https://img.shields.io/pypi/v/embloy-sdk.svg?style=flat)](https://pypi.org/project/embloy-python) [![Issues](https://img.shields.io/github/issues/Embloy/Embloy-Python)](https://github.com/Embloy/Embloy-Python/issues) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/Embloy/Embloy-Python/pulls)
 
 Embloy's Python SDK for interacting with your Embloy integration.
 
